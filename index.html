@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promoción del Día - Restaurante Sabor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #4a5fcd 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .btn-primary {
+            background-color: #fff;
+            color: #667eea;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:focus {
+            outline: 3px solid #fff;
+            outline-offset: 3px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 20px;
+            background-color: #fff;
+        }
+
+        .benefits h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: #2d3748;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #e6eeff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2.5rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #2d3748;
+        }
+
+        .benefit-card p {
+            color: #718096;
+            line-height: 1.7;
+        }
+
+        /* Carousel Section */
+        .carousel-section {
+            padding: 80px 20px;
+            background-color: #f8f9fa;
+        }
+
+        .carousel-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: #2d3748;
+        }
+
+        .carousel-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .carousel {
+            overflow: hidden;
+            border-radius: 15px;
+            background-color: #fff;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            padding: 40px;
+        }
+
+        .dish-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .dish-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #2d3748;
+            text-align: center;
+        }
+
+        .dish-description {
+            color: #718096;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .dish-price {
+            font-size: 1.5rem;
+            color: #667eea;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* Carousel Controls */
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .carousel-btn {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .carousel-btn:hover {
+            background-color: #4a5fcd;
+            transform: scale(1.1);
+        }
+
+        .carousel-btn:focus {
+            outline: 3px solid #667eea;
+            outline-offset: 3px;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #cbd5e0;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .indicator.active {
+            background-color: #667eea;
+            transform: scale(1.3);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 15px;
+        }
+
+        footer a {
+            color: #90cdf4;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #63b3ed;
+            text-decoration: underline;
+        }
+
+        footer a:focus {
+            outline: 2px solid #90cdf4;
+            outline-offset: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .benefits h2,
+            .carousel-section h2 {
+                font-size: 1.6rem;
+            }
+
+            .dish-image {
+                height: 200px;
+                font-size: 3rem;
+            }
+
+            .carousel-slide {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .btn-primary {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+
+            .benefits,
+            .carousel-section {
+                padding: 50px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero" role="banner">
+        <div class="container">
+            <h1>¡Promoción del Día!</h1>
+            <p>Disfruta de nuestros platillos especiales con descuentos increíbles</p>
+            <button class="btn-primary" aria-label="Ordenar ahora y aprovechar la promoción">
+                Ordenar Ahora
+            </button>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" aria-labelledby="benefits-title">
+        <div class="container">
+            <h2 id="benefits-title">¿Por Qué Elegirnos?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon" aria-hidden="true">🚀</div>
+                    <h3>Entrega Rápida</h3>
+                    <p>Recibe tu pedido en menos de 30 minutos o es gratis</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon" aria-hidden="true">⭐</div>
+                    <h3>Calidad Premium</h3>
+                    <p>Ingredientes frescos y de la más alta calidad en cada platillo</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon" aria-hidden="true">💰</div>
+                    <h3>Mejores Precios</h3>
+                    <p>Promociones diarias y precios accesibles para todos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carousel Section -->
+    <section class="carousel-section" aria-labelledby="dishes-title">
+        <div class="container">
+            <h2 id="dishes-title">Platillos en Promoción</h2>
+            <div class="carousel-container">
+                <div class="carousel" aria-roledescription="carrusel" aria-label="Platillos destacados">
+                    <div class="carousel-track">
+                        <div class="carousel-slide" role="group" aria-roledescription="diapositiva" aria-label="1 de 3">
+                            <div class="dish-image" aria-hidden="true">🍕</div>
+                            <h3 class="dish-title">Pizza Deluxe</h3>
+                            <p class="dish-description">Pizza familiar con ingredientes premium, masa artesanal y queso mozzarella</p>
+                            <p class="dish-price">$299 <span style="text-decoration: line-through; color: #a0aec0; font-size: 1.2rem;">$399</span></p>
+                        </div>
+                        <div class="carousel-slide" role="group" aria-roledescription="diapositiva" aria-label="2 de 3">
+                            <div class="dish-image" aria-hidden="true">🍔</div>
+                            <h3 class="dish-title">Hamburguesa Gourmet</h3>
+                            <p class="dish-description">Hamburguesa doble con carne angus, queso cheddar y papas premium</p>
+                            <p class="dish-price">$179 <span style="text-decoration: line-through; color: #a0aec0; font-size: 1.2rem;">$249</span></p>
+                        </div>
+                        <div class="carousel-slide" role="group" aria-roledescription="diapositiva" aria-label="3 de 3">
+                            <div class="dish-image" aria-hidden="true">🍱</div>
+                            <h3 class="dish-title">Sushi Combo</h3>
+                            <p class="dish-description">20 piezas variadas de sushi fresco preparado por chef especializado</p>
+                            <p class="dish-price">$349 <span style="text-decoration: line-through; color: #a0aec0; font-size: 1.2rem;">$449</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-controls">
+                    <button class="carousel-btn" id="prevBtn" aria-label="Platillo anterior">‹</button>
+                    <button class="carousel-btn" id="nextBtn" aria-label="Siguiente platillo">›</button>
+                </div>
+                
+                <div class="carousel-indicators" role="tablist" aria-label="Indicadores de platillos">
+                    <button class="indicator active" data-slide="0" role="tab" aria-label="Ver platillo 1" aria-selected="true"></button>
+                    <button class="indicator" data-slide="1" role="tab" aria-label="Ver platillo 2" aria-selected="false"></button>
+                    <button class="indicator" data-slide="2" role="tab" aria-label="Ver platillo 3" aria-selected="false"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <div class="container">
+            <p>&copy; 2025 Restaurante Sabor. Todos los derechos reservados.</p>
+            <p><a href="#privacy">Aviso de Privacidad</a> | <a href="#terms">Términos y Condiciones</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Carousel functionality
+        const track = document.querySelector('.carousel-track');
+        const slides = document.querySelectorAll('.carousel-slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const indicators = document.querySelectorAll('.indicator');
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        let autoPlayInterval;
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update indicators
+            indicators.forEach((indicator, index) => {
+                if (index === currentSlide) {
+                    indicator.classList.add('active');
+                    indicator.setAttribute('aria-selected', 'true');
+                } else {
+                    indicator.classList.remove('active');
+                    indicator.setAttribute('aria-selected', 'false');
+                }
+            });
+
+            // Update ARIA live region
+            const liveRegion = document.createElement('div');
+            liveRegion.setAttribute('aria-live', 'polite');
+            liveRegion.setAttribute('aria-atomic', 'true');
+            liveRegion.className = 'sr-only';
+            liveRegion.textContent = `Mostrando platillo ${currentSlide + 1} de ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        }
+
+        function stopAutoPlay() {
+            clearInterval(autoPlayInterval);
+        }
+
+        // Event listeners
+        nextBtn.addEventListener('click', () => {
+            stopAutoPlay();
+            nextSlide();
+            startAutoPlay();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            stopAutoPlay();
+            prevSlide();
+            startAutoPlay();
+        });
+
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                stopAutoPlay();
+                goToSlide(index);
+                startAutoPlay();
+            });
+        });
+
+        // Pause autoplay on hover
+        const carousel = document.querySelector('.carousel');
+        carousel.addEventListener('mouseenter', stopAutoPlay);
+        carousel.addEventListener('mouseleave', startAutoPlay);
+
+        // Start autoplay
+        startAutoPlay();
+
+        // Order button action
+        document.querySelector('.btn-primary').addEventListener('click', () => {
+            alert('¡Gracias por tu interés! Aquí conectarías con el sistema de pedidos.');
+        });
+    </script>
+</body>
+</html>
